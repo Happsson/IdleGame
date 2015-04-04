@@ -20,7 +20,7 @@ public class IDLEMAIN extends Activity {
     tNet1, tNet2, tNet3;
     SeekBar bar;
 
-    int[] stocks = {500,500,500};
+    int[] stocks = {50,500,5000};
     int[] shares = {0,0,0};
     int[] boughtFor = {0,0,0};
 
@@ -69,10 +69,12 @@ public class IDLEMAIN extends Activity {
         rand = new Random();
 
         //Set initial values for stocks and balance.
-        balance = 10000;
+        balance = 100;
         updateStockValues();
         updateBalance();
         updateAmountOwn();
+        updateCurrentProfits();
+
         currentBuy.setText("Buy with  0 % (0 €)");
 
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
