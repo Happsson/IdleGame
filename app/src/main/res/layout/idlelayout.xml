@@ -46,8 +46,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/tTotalMoney"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="102dp"
+        android:layout_above="@+id/seekBar"
+        android:layout_alignStart="@+id/bSell1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -94,8 +95,59 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/tTimer"
-        android:layout_above="@+id/tTotalMoney"
-        android:layout_alignEnd="@+id/button3"
-        android:layout_marginBottom="75dp" />
+        android:layout_alignTop="@+id/tTotalMoney"
+        android:layout_alignEnd="@+id/seekBar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/tOwnB1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/tOwnB2"
+        android:layout_below="@+id/tOwnB1"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/tOwnB3"
+        android:layout_below="@+id/tOwnB2"
+        android:layout_alignStart="@+id/tOwnB2" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sell B1"
+        android:id="@+id/bSell1"
+        android:layout_below="@+id/button2"
+        android:layout_alignEnd="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SellB2s"
+        android:id="@+id/bSell2"
+        android:layout_below="@+id/button2"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SellB3"
+        android:id="@+id/bSell3"
+        android:layout_alignTop="@+id/bSell2"
+        android:layout_alignEnd="@+id/seekBar"
+        android:singleLine="false" />
 
 </RelativeLayout>
