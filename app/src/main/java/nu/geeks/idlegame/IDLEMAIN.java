@@ -72,9 +72,16 @@ public class IDLEMAIN extends Activity {
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double procent = progress * 0.01;
-                bet = (int) (balance * procent);
-                currentBuy.setText("Buy with " + progress + "% (" + bet + " €)");
+
+                if(balance <= 0){
+                    bet = 0;
+                    currentBuy.setText("Buy with " + progress + "% (0 €)");
+                }else {
+
+                    double procent = progress * 0.01;
+                    bet = (int) (balance * procent);
+                    currentBuy.setText("Buy with " + progress + "% (" + bet + " €)");
+                }
             }
 
             @Override
@@ -194,11 +201,7 @@ public class IDLEMAIN extends Activity {
         shares[stock] = 0;
         updateBalance();
         updateAmountOwn();
-
-        double procent = bar.getProgress() * 0.01;
-        bet = (int) (balance * procent);
-        currentBuy.setText("Buy with " + bar.getProgress() + "% (" + bet + " €)");
-
+        updateBet();
     }
 
     private void buy(int stock){
@@ -207,6 +210,15 @@ public class IDLEMAIN extends Activity {
         balance -= nshares*stocks[stock];
         updateAmountOwn();
         updateBalance();
+        updateBet();
+
+
+    }
+
+    private void updateBet(){
+        double procent = bar.getProgress() * 0.01;
+        bet = (int) (balance * procent);
+        currentBuy.setText("Buy with " + bar.getProgress() + "% (" + bet + " €)");
     }
 
     /*
@@ -218,10 +230,11 @@ public class IDLEMAIN extends Activity {
         for(int i = 0; i < 3; i++){
             int superLuck = rand.nextInt(1000);
             int val;
+            int current = stocks[i];
             if(superLuck < 100){
-                if(stocksAlive[i]) stocks[i] = rand.nextInt(5000) + 500;
+                if(stocksAlive[i]) stocks[i] += rand.nextInt(5000) + 500;
             }else {
-                if(stocksAlive[i]) stocks[i] = rand.nextInt(stocks[i] * 2);
+                if(stocksAlive[i]) stocks[i] += (rand.nextInt(current * 2) - current);
             }
 
             if(stocks[i] == 0) stocksAlive[i] = false;
