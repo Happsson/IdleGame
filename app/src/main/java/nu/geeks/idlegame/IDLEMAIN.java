@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -18,11 +16,14 @@ import java.util.Random;
 public class IDLEMAIN extends Activity {
 
     Button b1,b2,b3, bSell1,bSell2,bSell3;
-    TextView currentBalance, currentBuy, tB1, tB2, tB3, tTimer, tOwn1, tOwn2, tOwn3;
+    TextView currentBalance, currentBuy, tB1, tB2, tB3, tTimer, tOwn1, tOwn2, tOwn3,
+    tNet1, tNet2, tNet3;
     SeekBar bar;
 
     int[] stocks = {500,500,500};
     int[] shares = {0,0,0};
+    int[] boughtFor = {0,0,0};
+
     boolean[] stocksAlive = {true,true,true};
     Random rand;
     int balance, bet;
@@ -34,7 +35,7 @@ public class IDLEMAIN extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.idlelayout);
 
-
+        //TODO - add lost/gained value on stocks.
 
         //Initialize all buttons and texts.
         b1 = (Button) findViewById(R.id.button);
@@ -55,6 +56,11 @@ public class IDLEMAIN extends Activity {
         tOwn1 = (TextView) findViewById(R.id.tOwnB1);
         tOwn2 = (TextView) findViewById(R.id.tOwnB2);
         tOwn3 = (TextView) findViewById(R.id.tOwnB3);
+
+        tNet1 = (TextView) findViewById(R.id.tNet1);
+        tNet2 = (TextView) findViewById(R.id.tNet2);
+        tNet3 = (TextView) findViewById(R.id.tNet3);
+
 
         tTimer = (TextView) findViewById(R.id.tTimer);
 
@@ -177,6 +183,7 @@ public class IDLEMAIN extends Activity {
             @Override
             public void onFinish() {
                 updateStockValues();
+                updateCurrentProfits();
                 start();
             }
         }.start();
@@ -189,6 +196,16 @@ public class IDLEMAIN extends Activity {
 
     }
 
+    private void updateCurrentProfits(){
+        int prof1 = (stocks[0]*shares[0] - boughtFor[0]);
+        int prof2 = (stocks[1]*shares[1] - boughtFor[1]);
+        int prof3 = (stocks[2]*shares[2] - boughtFor[2]);
+
+        tNet1.setText("profit " + prof1 + " €");
+        tNet2.setText("profit " + prof2 + " €");
+        tNet3.setText("profit " + prof3 + " €");
+    }
+
     private void updateAmountOwn(){
         tOwn1.setText("You own " + shares[0] + " shares");
         tOwn2.setText("You own " + shares[1] + " shares");
@@ -199,20 +216,23 @@ public class IDLEMAIN extends Activity {
     private void sell(int stock){
         balance += shares[stock]*stocks[stock];
         shares[stock] = 0;
+        boughtFor[stock] = 0;
+        updateCurrentProfits();
         updateBalance();
         updateAmountOwn();
         updateBet();
     }
 
     private void buy(int stock){
-        int nshares = bet/stocks[stock]; //number of shares.
-        shares[stock] += nshares; //Uppdate ownage
-        balance -= nshares*stocks[stock];
-        updateAmountOwn();
-        updateBalance();
-        updateBet();
-
-
+        if(stocks[stock] != 0) {
+            int nshares = bet / stocks[stock]; //number of shares.
+            shares[stock] += nshares; //Uppdate ownage
+            balance -= nshares * stocks[stock];
+            boughtFor[stock] += nshares * stocks[stock];
+            updateAmountOwn();
+            updateBalance();
+            updateBet();
+        }
     }
 
     private void updateBet(){

@@ -85,9 +85,9 @@
         android:text="Buy B1"
         android:id="@+id/button"
         android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/tMoneyToBet"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="56dp" />
+        android:layout_marginTop="29dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -149,5 +149,32 @@
         android:layout_alignTop="@+id/bSell2"
         android:layout_alignEnd="@+id/seekBar"
         android:singleLine="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/tNet1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/bSell1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/tNet2"
+        android:layout_alignBottom="@+id/tNet1"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/tNet3"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/seekBar" />
 
 </RelativeLayout>
